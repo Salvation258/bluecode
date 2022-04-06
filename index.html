@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>通行码领取</title>
+    <style type="text/css">
+        .div1 {
+            width: 100%;
+            vertical-align: middle;
+        }
+        
+        .div1 img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+        }
+        
+        .time {
+            color: #DC8939;
+            font-family: sans-serif;
+            font-size: 72px;
+            font-weight: 500;
+        }
+        
+        .name {
+            color: black;
+            font-family: sans-serif;
+            font-size: 48px;
+            font-weight: 370;
+        }
+        
+        .college {
+            color: black;
+            font-family: sans-serif;
+            font-size: 42px;
+            font-weight: 370;
+        }
+        
+        .container {
+            width: 100%;
+            position: absolute;
+            text-align: center;
+        }
+        
+        .time-container {
+            top: 550px;
+        }
+        
+        .name-container {
+            top: 350px;
+        }
+        
+        .college-container {
+            top: 450px;
+        }
+        
+        body {
+            background-color: #F7F7F7;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <div class='div1'>
+        <img src="https://static01.imgkr.com/temp/04ed5ab835964859aef5a6910c5e1cc5.jpeg" alt="">
+    </div>
+    <div class="time-container container">
+        <div id="time" class="time"></div>
+    </div>
+    <div class="name-container container">
+        <div id="name" class="name"></div>
+    </div>
+    <div class="college-container container">
+        <div class="college">计算机科学与技术学院、软件学院</div>
+    </div>
+</body>
+<script type="text/javascript">
+    var ua = navigator.userAgent.toLowerCase();
+    setInterval(function() {
+        var time = new Date();
+        var month = checkTime(time.getMonth() + 1); //获取月份
+        var day = checkTime(time.getDate()); //获取日期
+        var hour = checkTime(time.getHours()); //获取时
+        var minite = checkTime(time.getMinutes()); //获取分
+        var second = checkTime(time.getSeconds()); //获取秒
+        /****当时、分、秒、小于10时，则添加0****/
+        function checkTime(i) {
+            if (i < 10) return "0" + i;
+            return i;
+        }
+        var box = document.getElementById("time");
+        box.innerHTML = month + "-" + day + " " + hour + ":" + minite + ":" + second;
+    }, 1000); //setInterval(fn,i) 定时器，每隔i秒执行fn
+
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+    function getName() {
+        var familyNames = new Array(
+            "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈",
+            "褚", "卫", "蒋", "沈", "韩", "杨", "朱", "秦", "尤", "许",
+            "何", "吕", "施", "张", "孔", "曹", "严", "华", "金", "魏",
+            "陶", "姜", "戚", "谢", "邹", "喻", "柏", "水", "窦", "章",
+            "云", "苏", "潘", "葛", "奚", "范", "彭", "郎", "鲁", "韦",
+            "昌", "马", "苗", "凤", "花", "方", "俞", "任", "袁", "柳",
+            "酆", "鲍", "史", "唐", "费", "廉", "岑", "薛", "雷", "贺",
+            "倪", "汤", "滕", "殷", "罗", "毕", "郝", "邬", "安", "常",
+            "乐", "于", "时", "傅", "皮", "卞", "齐", "康", "伍", "余",
+            "元", "卜", "顾", "孟", "平", "黄", "和", "穆", "萧", "尹"
+        );
+        var givenNames = new Array(
+            "子璇", "淼", "国栋", "夫子", "瑞堂", "甜", "敏", "尚", "国贤", "贺祥", "晨涛",
+            "昊轩", "易轩", "益辰", "益帆", "益冉", "瑾春", "瑾昆", "春齐", "杨", "文昊",
+            "东东", "雄霖", "浩晨", "熙涵", "溶溶", "冰枫", "欣欣", "宜豪", "欣慧", "建政",
+            "美欣", "淑慧", "文轩", "文杰", "欣源", "忠林", "榕润", "欣汝", "慧嘉", "新建",
+            "建林", "亦菲", "林", "冰洁", "佳欣", "涵涵", "禹辰", "淳美", "泽惠", "伟洋",
+            "涵越", "润丽", "翔", "淑华", "晶莹", "凌晶", "苒溪", "雨涵", "嘉怡", "佳毅",
+            "子辰", "佳琪", "紫轩", "瑞辰", "昕蕊", "萌", "明远", "欣宜", "泽远", "欣怡",
+            "佳怡", "佳惠", "晨茜", "晨璐", "运昊", "汝鑫", "淑君", "晶滢", "润莎", "榕汕",
+            "佳钰", "佳玉", "晓庆", "一鸣", "语晨", "添池", "添昊", "雨泽", "雅晗", "雅涵",
+            "清妍", "诗悦", "嘉乐", "晨涵", "天赫", "玥傲", "佳昊", "天昊", "萌萌", "若萌"
+        );
+        var i = parseInt(100 * Math.random());
+        var familyName = familyNames[i];
+        var j = parseInt(100 * Math.random());
+        var givenName = givenNames[j];
+        var name = familyName + givenName;
+        return name;
+    }
+    var name = getQueryVariable('name');
+    if (name == "false" || name == "") {
+        var name = prompt("请输入姓名", ""); // 弹出input框
+    }
+    console.log(name)
+    if (name == "false" || name == "" || name == "null") {
+        alert("未指定姓名，随机生成姓名")
+        name = getName();
+    } else {
+        name = decodeURI(name)
+    }
+    var nameBox = document.getElementById("name");
+    nameBox.innerHTML = name + " (学生) 通行码";
+</script>
+
+</html>
