@@ -84,43 +84,16 @@
 <script type="text/javascript">
     var ua = navigator.userAgent.toLowerCase();
     /**
-     *获取当前星期几
+     *获取今天的颜色
      *
      */
-    function getWeekDate() {
+    function getTodayColor() {
         var now = new Date();
         var day = now.getDay();
-        var weeks = new Array("0", "1", "2", "3", "4", "5", "6");
-        var week = weeks[day];
-        return week;
+        var colors = ['#f47920', '#E6BB36', '#7fb80e', '#56452d', '#6950a1', '#145b7d', '#905a3d'];
+        return colors[day];
     }
-    var WeekDay = {};
-    switch (getWeekDate()) {
-        case "1":
-            WeekDay.color = '#f47920';
-            break;
-        case "2":
-            WeekDay.color = '#E6BB36';
-            break;
-        case "3":
-            WeekDay.color = '#7fb80e';
-            break;
-        case "4":
-            WeekDay.color = '#56452d';
-            break;
-        case "5":
-            WeekDay.color = '#6950a1';
-            break;
-        case "6":
-            WeekDay.color = '#145b7d';
-            break;
-        case "0":
-            WeekDay.color = '#905a3d';
-            break;
-        default:
-            break;
-    }
-    document.getElementById("time").style.color = WeekDay.color;
+    document.getElementById("time").style.color = getTodayColor();
     setInterval(function() {
         var time = new Date();
         var month = checkTime(time.getMonth() + 1); //获取月份
