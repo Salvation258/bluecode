@@ -9,80 +9,110 @@
             width: 100%;
             vertical-align: middle;
         }
-        
+
         .div1 img {
             max-width: 100%;
             max-height: 100%;
             display: block;
             margin: auto;
         }
-        
+
         .time {
             font-family: sans-serif;
             font-size: 72px;
             font-weight: 500;
         }
-        
+
         .name {
             color: black;
             font-family: sans-serif;
             font-size: 48px;
             font-weight: 370;
         }
-        
+
         .college {
             color: black;
             font-family: sans-serif;
             font-size: 42px;
             font-weight: 370;
         }
-        
+
         .container {
             width: 100%;
             position: absolute;
             text-align: center;
         }
-        
+
         .time-container {
             top: 550px;
         }
-        
+
         .name-container {
             top: 350px;
         }
-        
+
         .college-container {
             top: 450px;
         }
-        
+
         body {
             background-color: #F7F7F7;
         }
-        
+
         html,
         body {
             width: 100%;
             height: 100%
         }
+
+        .qrcode {
+            position: fixed;
+            top: 732px;
+            left: 257px;
+        }
+
+        .appeal {
+            position: fixed;
+            top: 1431px;
+            left: 315px;
+            width: 187px;
+            height: 112px;
+        }
+
+        .complexCode {
+            position: fixed;
+            top: 1431px;
+            left: 533px;
+            width: 146px;
+            height: 112px;
+        }
     </style>
 </head>
 
 <body>
-    <div class='div1'>
-        <img src="./img/bg.jpg" alt="">
-    </div>
-    <div class="time-container container">
-        <div id="time" class="time"></div>
-    </div>
-    <div class="name-container container">
-        <div id="name" class="name"></div>
-    </div>
-    <div class="college-container container">
-        <div class="college">计算机科学与技术学院、软件学院</div>
-    </div>
+<div class='div1'>
+    <img src="./img/bg.jpg" alt="">
+</div>
+<div class="time-container container">
+    <div id="time" class="time"></div>
+</div>
+<div class="name-container container">
+    <div id="name" class="name"></div>
+</div>
+<div class="college-container container">
+    <div class="college">计算机科学与技术学院、软件学院</div>
+</div>
+<div class="qrcode" id="qr"></div>
+<div class="appeal" onclick="window.open('http://mryb.zjut.edu.cn/#/appeal')"></div>
+<div class="complexCode" onclick="window.open('http://mryb.zjut.edu.cn/#/complexCode')"></div>
 </body>
+<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
+<script src="./js/qrcode.min.js"></script>
 <script type="text/javascript">
     var ua = navigator.userAgent.toLowerCase();
+
     /**
      *获取今天的颜色
      *
@@ -93,8 +123,9 @@
         var colors = ['#f47920', '#E6BB36', '#7fb80e', '#6FA656', '#6950a1', '#145b7d', '#905a3d'];
         return colors[day];
     }
+
     document.getElementById("time").style.color = getTodayColor();
-    setInterval(function() {
+    setInterval(function () {
         var time = new Date();
         var month = checkTime(time.getMonth() + 1); //获取月份
         var day = checkTime(time.getDate()); //获取日期
@@ -106,6 +137,7 @@
             if (i < 10) return "0" + i;
             return i;
         }
+
         var box = document.getElementById("time");
         box.innerHTML = month + "-" + day + " " + hour + ":" + minite + ":" + second;
     }, 1000); //setInterval(fn,i) 定时器，每隔i秒执行fn
@@ -154,12 +186,47 @@
         var name = familyName + givenName;
         return name;
     }
+
+    function randomString(e) {
+        e = e || 32;
+        var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz0123456789",
+            a = t.length,
+            n = "";
+        for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+        return n
+    }
+
+    function printQR(name, id, idCard, codeSize) {
+        document.getElementById("qr").innerHTML = ""
+        nonce = randomString(8)
+        timestamp = Date.now()
+        signature = CryptoJS.SHA1("" + id + name + "2" + idCard + timestamp + nonce).toString()
+        data = {
+            id: id,
+            name: name,
+            type: 2,
+            IDCard: idCard,
+            timestamp: timestamp,
+            nonce: nonce,
+            signature: signature
+        }
+        console.log(JSON.stringify(data))
+        var qrcode = new QRCode(document.getElementById("qr"), {
+            text: JSON.stringify(data),
+            width: codeSize,
+            height: codeSize,
+            colorDark: "#1388cb",
+            colorLight: "#fff",
+            correctLevel: 0
+        });
+    }
+
     var name = getQueryVariable('name');
-    if (name == "false" || name == "") {
-        var name = prompt("请输入姓名", ""); // 弹出input框
+    if (name === "false" || name === "") {
+        name = prompt("请输入姓名", ""); // 弹出input框
     }
     console.log(name)
-    if (name == "false" || name == "" || name == "null") {
+    if (name === "false" || name === "" || name === "null") {
         alert("未指定姓名，随机生成姓名")
         name = getName();
     } else {
@@ -167,6 +234,14 @@
     }
     var nameBox = document.getElementById("name");
     nameBox.innerHTML = name + " (学生) 通行码";
+    id = 214869373221900000 + Math.floor(Math.random() * 100000)
+    idCard = randomString(24)
+    printQR(name, id, idCard, 500)
+    setInterval(function () {
+        printQR(name, id, idCard, 500)
+    }, 15e3)
+
+
 </script>
 
 </html>
