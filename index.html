@@ -65,11 +65,7 @@
             height: 100%
         }
 
-        .qrcode {
-            position: fixed;
-            top: 732px;
-            left: 257px;
-        }
+        .qrcode { position: fixed;top: 732px;left: 257px; }
 
         .appeal {
             position: fixed;
@@ -236,9 +232,10 @@
     nameBox.innerHTML = name + " (学生) 通行码";
     id = 214869373221900000 + Math.floor(Math.random() * 100000)
     idCard = randomString(24)
-    printQR(name, id, idCard, 500)
+    codeSize = 500
+    printQR(name, id, idCard, codeSize)
     setInterval(function () {
-        printQR(name, id, idCard, 500)
+        printQR(name, id, idCard, codeSize)
     }, 15e3)
 
 
