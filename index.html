@@ -65,8 +65,7 @@
             height: 100%
         }
 
-        .qrcode { position: fixed;top: 732px;left: 257px; }
-
+        .qrcode { position: fixed;top: 1040px;left: 261px; }
         .appeal {
             position: fixed;
             top: 1431px;
@@ -116,7 +115,7 @@
     function getTodayColor() {
         var now = new Date();
         var day = now.getDay();
-        var colors = ['#f47920', '#E6BB36', '#7fb80e', '#6FA656', '#6950a1', '#145b7d', '#905a3d'];
+        var colors = ['#f47920', '#E6BB36', '#7fb80e', '#69A250', '#6950a1', '#145b7d', '#905a3d'];
         return colors[day];
     }
 
@@ -232,8 +231,7 @@
     nameBox.innerHTML = name + " (学生) 通行码";
     id = 214869373221900000 + Math.floor(Math.random() * 100000)
     idCard = randomString(24)
-    codeSize = 500
-    printQR(name, id, idCard, codeSize)
+    codeSize = 490    printQR(name, id, idCard, codeSize)
     setInterval(function () {
         printQR(name, id, idCard, codeSize)
     }, 15e3)
