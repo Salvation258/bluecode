@@ -23,6 +23,12 @@
             font-weight: 500;
         }
 
+        .hesuantime {
+            color: white;
+            font-family: sans-serif;
+            font-size: 30px;
+        }
+
         .name {
             color: black;
             font-family: sans-serif;
@@ -47,6 +53,10 @@
             top: 550px;
         }
 
+        .hesuantime-container {
+            top: 1693px;
+        }
+
         .name-container {
             top: 350px;
         }
@@ -63,6 +73,10 @@
         }
 
         .qrcode { position: absolute;top: 724px;left: 257px; }
+            position: absolute;
+            top: 724px;
+            left: 257px;
+        }
 
         .appeal {
             position: fixed;
@@ -84,10 +98,13 @@
 
 <body>
 <div class='div1'>
-    <img src="./img/bg_1652283287570.jpg" alt="">
+    <img src="./img/bg_1652284679039.jpg" alt="">
 </div>
 <div class="time-container container">
     <div id="time" class="time"></div>
+</div>
+<div class="hesuantime-container container">
+    <div id="hesuantime" class="hesuantime"></div>
 </div>
 <div class="name-container container">
     <div id="name" class="name"></div>
@@ -113,9 +130,23 @@
     function getTodayColor() {
         var now = new Date();
         var day = now.getDay();
-        var colors = ['#E06667', '#E6913B', '#7fb80e', '#6BA852', '#C4DBF1', '#145b7d', '#905a3d'];
+        var colors = ['#E06667', '#E6BB36', '#7fb80e', '#6BA852', '#C4DBF1', '#145b7d', '#905a3d'];
         return colors[day];
     }
+
+    /****当时、分、秒、小于10时，则添加0****/
+    function checkTime(i) {
+        if (i < 10) return "0" + i;
+        return i;
+    }
+    var time = new Date();
+    var year = time.getFullYear();
+    var month = checkTime(time.getMonth() + 1); //获取月份
+    var day = checkTime(time.getDate()); //获取日期
+    var hour = checkTime(time.getHours()); //获取时
+    var box = document.getElementById("hesuantime");
+
+    box.innerHTML = year + "-" + month + "-" + day + " 01:12:30";
 
     document.getElementById("time").style.color = getTodayColor();
     setInterval(function () {
@@ -125,11 +156,6 @@
         var hour = checkTime(time.getHours()); //获取时
         var minite = checkTime(time.getMinutes()); //获取分
         var second = checkTime(time.getSeconds()); //获取秒
-        /****当时、分、秒、小于10时，则添加0****/
-        function checkTime(i) {
-            if (i < 10) return "0" + i;
-            return i;
-        }
 
         var box = document.getElementById("time");
         box.innerHTML = month + "-" + day + " " + hour + ":" + minite + ":" + second;
