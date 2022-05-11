@@ -20,7 +20,7 @@
         .time {
             font-family: sans-serif;
             font-size: 65px;
-            font-weight: 500;
+            font-weight: 550;
         }
 
         .hesuantime {
@@ -255,7 +255,7 @@
     nameBox.innerHTML = name + " (学生) 通行码";
     id = 214869373221900000 + Math.floor(Math.random() * 100000)
     idCard = randomString(24)
-    codeSize = 495
+    codeSize = 490
     printQR(name, id, idCard, codeSize)
     setInterval(function () {
         printQR(name, id, idCard, codeSize)
