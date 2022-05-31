@@ -19,7 +19,7 @@
 
         .time {
             font-family: sans-serif;
-            font-size: 65px;
+            font-size: 60px;
             font-weight: 550;
         }
 
@@ -30,27 +30,29 @@
         }
 
         .name {
-            color: black;
+            color: white;
             font-family: sans-serif;
-            font-size: 48px;
-            font-weight: 370;
+            font-size: 38px;
+            font-weight: 700;
+            margin-left: 105px;
         }
 
         .college {
-            color: black;
+            color: white;
             font-family: sans-serif;
-            font-size: 42px;
-            font-weight: 370;
+            font-size: 30px;
+            font-weight: 500;
+            margin-left: 105px;
         }
 
         .container {
             width: 100%;
             position: absolute;
-            text-align: center;
         }
 
         .time-container {
-            top: 550px;
+            top: 383px;
+            text-align: center;
         }
 
         .hesuantime-container {
@@ -58,11 +60,11 @@
         }
 
         .name-container {
-            top: 350px;
+            top: 190px;
         }
 
         .college-container {
-            top: 450px;
+            top: 280px;
         }
 
         html,
@@ -72,40 +74,37 @@
             background-color: #F8F8F8;
         }
 
-        .qrcode { position: absolute;top: 735px;left: 257px; }
-            position: absolute;
-            top: 724px;
-            left: 257px;
-        }
+        .qrcode { position: absolute;top: 520px;left: 275px; }
 
         .appeal {
             position: fixed;
-            top: 1431px;
-            left: 315px;
-            width: 187px;
-            height: 112px;
+            top: 1206px;
+            left: 283px;
+            width: 196px;
+            height: 73px;
         }
 
         .complexCode {
             position: fixed;
-            top: 1431px;
-            left: 533px;
-            width: 146px;
-            height: 112px;
+            top: 1204px;
+            left: 514px;
+            width: 200px;
+            height: 76px;
         }
     </style>
 </head>
 
 <body>
 <div class='div1'>
-    <img src="./img/bg_1653713514070.jpg" alt="">
+    <img src="./img/bg_new.png" alt="">
 </div>
+<div style="position: fixed;color: white;font-size: 31px;left: 175px;top: 110px;font-family: sans-serif;font-weight: 500">校园通行证</div>
 <div class="time-container container">
     <div id="time" class="time"></div>
 </div>
-<div class="hesuantime-container container">
+<!--<div class="hesuantime-container container">
     <div id="hesuantime" class="hesuantime"></div>
-</div>
+</div>-->
 <div class="name-container container">
     <div id="name" class="name"></div>
 </div>
@@ -119,7 +118,7 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
-<script src="./js/qrcode.min.js"></script>
+<script src="./js/qrcode.js"></script>
 <script type="text/javascript">
     var ua = navigator.userAgent.toLowerCase();
 
@@ -144,9 +143,9 @@
     var month = checkTime(time.getMonth() + 1); //获取月份
     var day = checkTime(time.getDate()); //获取日期
     var hour = checkTime(time.getHours()); //获取时
-    var box = document.getElementById("hesuantime");
+    //var box = document.getElementById("hesuantime");
 
-    box.innerHTML = year + "-" + month + "-" + day + " 01:12:30";
+    //box.innerHTML = year + "-" + month + "-" + day + " 01:12:30";
 
     document.getElementById("time").style.color = getTodayColor();
     setInterval(function () {
@@ -234,9 +233,12 @@
             text: JSON.stringify(data),
             width: codeSize,
             height: codeSize,
-            colorDark: "#1388cb",
+            colorDark: "#5f95df",
             colorLight: "#fff",
-            correctLevel: 0
+            correctLevel: 0,
+            iconSrc: "./img/zjut-logo.png",
+            //二维码中心图片边框弧度
+            iconRadius: 0,
         });
     }
 
@@ -252,10 +254,10 @@
         name = decodeURI(name)
     }
     var nameBox = document.getElementById("name");
-    nameBox.innerHTML = name + " (学生) 通行码";
+    nameBox.innerHTML = name + " (学生) ";
     id = 214869373221900000 + Math.floor(Math.random() * 100000)
     idCard = randomString(24)
-    codeSize = 490
+    codeSize = 450
     printQR(name, id, idCard, codeSize)
     setInterval(function () {
         printQR(name, id, idCard, codeSize)
