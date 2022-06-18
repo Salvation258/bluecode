@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>浙江工业大学校园通行码</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style type="text/css">
+        body{
+            margin: 0;
+        }
+
+        .div1 {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .div1 img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        .time {
+            font-family: sans-serif;
+            font-size: 60px;
+            font-weight: 700;
+        }
+
+        .hesuantime {
+            color: white;
+            font-family: sans-serif;
+            font-size: 27px;
+            padding-left: 94px;
+        }
+
+        .name {
+            color: white;
+            font-family: sans-serif;
+            font-size: 43px;
+            font-weight: 700;
+            margin-left: 105px;
+        }
+
+        .college {
+            color: white;
+            font-family: sans-serif;
+            font-size: 30px;
+            font-weight: 500;
+            margin-left: 105px;
+        }
+
+        .container {
+            width: 100%;
+            position: absolute;
+        }
+
+        .loading-container {
+            width: 100%;
+            position: absolute;
+            top: 40%;
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .time-container {
+            top: 372px;
+            text-align: center;
+        }
+
+        .hesuantime-container {
+            top: 1469px;
+        }
+
+        .name-container {
+            top: 190px;
+        }
+
+        .college-container {
+            top: 280px;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: #F8F8F8;
+        }
+
+        .qrcode { position: absolute;top: 512px;left: 267px; }
+
+        .appeal {
+            position: absolute;
+            top: 1788px;
+            left: 351px;
+            width: 136px;
+            height: 73px;
+        }
+
+        .complexCode {
+            position: absolute;
+            top: 1788px;
+            left: 514px;
+            width: 111px;
+            height: 76px;
+        }
+
+        .travelCard {
+            position: absolute;
+            top: 1627px;
+            left: 178px;
+            width: 775px;
+            height: 130px;
+        }
+
+        .van-loading {
+            width: 70px;
+            height: 70px;
+            font-size: 0;
+            line-height: 0;
+            position: relative;
+            vertical-align: middle;
+            padding: 80px;
+            border-radius: 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            z-index: 999;
+        }
+
+        .van-loading__spinner--circular {
+            -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+        }
+
+        @keyframes van-rotate {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes van-circular {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+            50% {
+                stroke-dasharray: 90, 150;
+                stroke-dashoffset: -40;
+            }
+            100% {
+                stroke-dasharray: 90, 150;
+                stroke-dashoffset: -120;
+            }
+        }
+
+        .van-loading__spinner {
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            -webkit-animation: van-rotate 0.8s linear infinite;
+            animation: van-rotate 0.8s linear infinite;
+        }
+
+        .van-loading__circular {
+            width: 100%;
+            height: 100%;
+        }
+
+        .van-loading__circular circle {
+            stroke: currentColor;
+            stroke-width: 3;
+            stroke-linecap: round;
+            -webkit-animation: van-circular 1.5s ease-in-out infinite;
+            animation: van-circular 1.5s ease-in-out infinite;
+        }
+
+        circle {
+            cx: 50;
+            cy: 50;
+            r: 20;
+            fill: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class='div1'>
+    <img src="https://s6.jpg.cm/2022/06/18/PPHrvQ.png" alt="">
+</div>
+<div class="loading-container" id="loading" style="display: block">
+    <div class="van-loading van-loading--circular van-loading--white" style="color: white;">
+    <span class="van-loading__spinner van-loading__spinner--circular">
+        <svg viewBox="25 25 50 50" class="van-loading__circular">
+            <circle cx="50" cy="50" r="20" fill="none"></circle>
+        </svg>
+    </span>
+    </div>
+</div>
+<div style="position: absolute;color: white;font-size: 31px;left: 175px;top: 110px;font-family: sans-serif;font-weight: 500">
+    校园通行证
+</div>
+<div class="time-container container">
+    <div id="time" class="time"></div>
+</div>
+<div class="hesuantime-container container">
+    <div id="hesuantime" class="hesuantime"></div>
+</div>
+<div class="name-container container">
+    <div id="name" class="name"></div>
+</div>
+<div class="college-container container">
+    <div class="college">计算机科学与技术学院、软件学院</div>
+</div>
+<div class="qrcode" id="qr"></div>
+<div class="appeal" onclick="window.open('http://mryb.zjut.edu.cn/#/appeal')"></div>
+<div class="complexCode" onclick="window.open('http://mryb.zjut.edu.cn/#/complexCode')"></div>
+<div class="travelCard" onclick="window.open('alipays://platformapi/startapp?appId=2021002170600786')"></div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/sha1.min.js"></script>
+<script src="./js/qrcode.js"></script>
+<script type="text/javascript">
+    var ua = navigator.userAgent.toLowerCase();
+    var loading = document.getElementById("loading");
+
+    function showLoading(t) {
+        return new Promise(resolve => {
+            loading.style.display = 'block'
+            setTimeout(function () {
+                loading.style.display = 'none'
+                resolve()
+            }, t)
+        })
+    }
+
+    /**
+     *获取今天的颜色
+     *
+     */
+    function getTodayColor() {
+        var now = new Date();
+        var day = now.getDay();
+        var colors = ['#E06765', '#E59138', '#F0C233', '#9DC6E7', '#9DC6E7', '#145b7d', '#8D7CC2'];
+        return colors[day];
+    }
+
+    /****当时、分、秒、小于10时，则添加0****/
+    function checkTime(i) {
+        if (i < 10) return "0" + i;
+        return i;
+    }
+
+    var time = new Date();
+    var lastDay = new Date(time.getTime()-86400000);
+    var year = time.getFullYear();
+    var month = checkTime(time.getMonth() + 1); //获取月份
+    var day = checkTime(time.getDate()); //获取日期
+    var hour = checkTime(time.getHours()); //获取时
+
+    var lastDayYear = lastDay.getFullYear();
+    var lastDayMonth = checkTime(lastDay.getMonth() + 1); //获取月份
+    var lastDayDay = checkTime(lastDay.getDate()); //获取日期
+    var lastDayHour = checkTime(lastDay.getHours()); //获取时
+
+    var box = document.getElementById("hesuantime");
+    box.innerHTML = lastDayMonth + "." + lastDayDay + " 01:12:30";
+
+    document.getElementById("time").style.color = getTodayColor();
+    setInterval(function () {
+        var time = new Date();
+        var month = checkTime(time.getMonth() + 1); //获取月份
+        var day = checkTime(time.getDate()); //获取日期
+        var hour = checkTime(time.getHours()); //获取时
+        var minite = checkTime(time.getMinutes()); //获取分
+        var second = checkTime(time.getSeconds()); //获取秒
+
+        var box = document.getElementById("time");
+        box.innerHTML = month + "-" + day + " " + hour + ":" + minite + ":" + second;
+    }, 1000); //setInterval(fn,i) 定时器，每隔i秒执行fn
+
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) {
+                return pair[1];
+            }
+        }
+        return (false);
+    }
+
+    function getName() {
+        var familyNames = new Array(
+            "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈",
+            "褚", "卫", "蒋", "沈", "韩", "杨", "朱", "秦", "尤", "许",
+            "何", "吕", "施", "张", "孔", "曹", "严", "华", "金", "魏",
+            "陶", "姜", "戚", "谢", "邹", "喻", "柏", "水", "窦", "章",
+            "云", "苏", "潘", "葛", "奚", "范", "彭", "郎", "鲁", "韦",
+            "昌", "马", "苗", "凤", "花", "方", "俞", "任", "袁", "柳",
+            "酆", "鲍", "史", "唐", "费", "廉", "岑", "薛", "雷", "贺",
+            "倪", "汤", "滕", "殷", "罗", "毕", "郝", "邬", "安", "常",
+            "乐", "于", "时", "傅", "皮", "卞", "齐", "康", "伍", "余",
+            "元", "卜", "顾", "孟", "平", "黄", "和", "穆", "萧", "尹"
+        );
+        var givenNames = new Array(
+            "子璇", "淼", "国栋", "夫子", "瑞堂", "甜", "敏", "尚", "国贤", "贺祥", "晨涛",
+            "昊轩", "易轩", "益辰", "益帆", "益冉", "瑾春", "瑾昆", "春齐", "杨", "文昊",
+            "东东", "雄霖", "浩晨", "熙涵", "溶溶", "冰枫", "欣欣", "宜豪", "欣慧", "建政",
+            "美欣", "淑慧", "文轩", "文杰", "欣源", "忠林", "榕润", "欣汝", "慧嘉", "新建",
+            "建林", "亦菲", "林", "冰洁", "佳欣", "涵涵", "禹辰", "淳美", "泽惠", "伟洋",
+            "涵越", "润丽", "翔", "淑华", "晶莹", "凌晶", "苒溪", "雨涵", "嘉怡", "佳毅",
+            "子辰", "佳琪", "紫轩", "瑞辰", "昕蕊", "萌", "明远", "欣宜", "泽远", "欣怡",
+            "佳怡", "佳惠", "晨茜", "晨璐", "运昊", "汝鑫", "淑君", "晶滢", "润莎", "榕汕",
+            "佳钰", "佳玉", "晓庆", "一鸣", "语晨", "添池", "添昊", "雨泽", "雅晗", "雅涵",
+            "清妍", "诗悦", "嘉乐", "晨涵", "天赫", "玥傲", "佳昊", "天昊", "萌萌", "若萌"
+        );
+        var i = parseInt(100 * Math.random());
+        var familyName = familyNames[i];
+        var j = parseInt(100 * Math.random());
+        var givenName = givenNames[j];
+        var name = familyName + givenName;
+        return name;
+    }
+
+    function randomString(e) {
+        e = e || 32;
+        var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz0123456789",
+            a = t.length,
+            n = "";
+        for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+        return n
+    }
+
+    function printQR(name, id, idCard, codeSize) {
+        document.getElementById("qr").innerHTML = ""
+        nonce = randomString(8)
+        timestamp = Date.now()
+        signature = CryptoJS.SHA1("" + id + name + "2" + idCard + timestamp + nonce).toString()
+        data = {
+            id: id,
+            name: name,
+            type: 2,
+            IDCard: idCard,
+            timestamp: timestamp,
+            nonce: nonce,
+            signature: signature
+        }
+        console.log(JSON.stringify(data))
+        var qrcode = new QRCode(document.getElementById("qr"), {
+            text: JSON.stringify(data),
+            width: codeSize,
+            height: codeSize,
+            colorDark: "#5f95df",
+            colorLight: "#fff",
+            correctLevel: QRCode.CorrectLevel.H,
+            //iconSrc: "https://s6.jpg.cm/2022/06/18/PPHYXE.png",
+            //二维码中心图片边框弧度
+            //iconRadius: 0,
+        });
+    }
+
+    var name = getQueryVariable('name');
+    if (name === "false" || name === "") {
+        name = prompt("请输入姓名", ""); // 弹出input框
+    }
+    console.log(name)
+    if (name === "false" || name === "" || name === "null") {
+        alert("未指定姓名，随机生成姓名")
+        name = getName();
+    } else {
+        name = decodeURI(name)
+    }
+    var nameBox = document.getElementById("name");
+    nameBox.innerHTML = name + " (学生) ";
+    id = 214869373221900000 + Math.floor(Math.random() * 100000)
+    idCard = randomString(24)
+    codeSize = 450
+    showLoading(1000).then(res => {
+        printQR(name, id, idCard, codeSize)
+    })
+    setInterval(function () {
+        showLoading(700).then(res => {
+            printQR(name, id, idCard, codeSize)
+        })
+    }, 15e3)
+
+
+</script>
+
+</html>
