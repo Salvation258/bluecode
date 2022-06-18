@@ -267,10 +267,10 @@
     var day = checkTime(time.getDate()); //获取日期
     var hour = checkTime(time.getHours()); //获取时
 
-    var lastDayYear = time.getFullYear();
-    var lastDayMonth = checkTime(time.getMonth() + 1); //获取月份
-    var lastDayDay = checkTime(time.getDate()); //获取日期
-    var lastDayHour = checkTime(time.getHours()); //获取时
+    var lastDayYear = lastDay.getFullYear();
+    var lastDayMonth = checkTime(lastDay.getMonth() + 1); //获取月份
+    var lastDayDay = checkTime(lastDay.getDate()); //获取日期
+    var lastDayHour = checkTime(lastDay.getHours()); //获取时
 
     var box = document.getElementById("hesuantime");
     box.innerHTML = lastDayMonth + "." + lastDayDay + " 01:12:30";
