@@ -24,8 +24,9 @@
         
         .time {
             font-family: sans-serif;
-            font-size: 100px;
+            font-size: 88px;
             font-weight: 700;
+            color: #414141;
         }
         
         .container {
@@ -43,7 +44,7 @@
         }
         
         .time-container {
-            top: 390px;
+            top: 360px;
             text-align: center;
         }
         
@@ -56,8 +57,8 @@
         
         .qrcode {
             position: absolute;
-            top: 770px;
-            left: 350px;
+            top: 700px;
+            left: 315px;
         }
         
         .appeal {
@@ -228,13 +229,13 @@
             height: codeSize,
             colorDark: "#56a569",
             colorLight: "#fff",
-            correctLevel: QRCode.CorrectLevel.H,
+            correctLevel: QRCode.CorrectLevel.Q,
             //iconSrc: "./img/zjut-logo.png",
             //二维码中心图片边框弧度
             //iconRadius: 0,
         });
     }
-    var CODE_SIZE = 400
+    var CODE_SIZE = 350
     var BASE_URL = "https://yzy.zjgsu.edu.cn/checkin/2001110227?timestamp="
     function getURL(){
         var timestamp = new Date().getTime()
